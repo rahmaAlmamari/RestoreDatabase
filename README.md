@@ -2,7 +2,7 @@
 
 ## **Step 1: Drop the Current Database (Simulate System Failure)**
 ```sql
-DROP DATABASE TrainingDB; 
+DROP DATABASE TrainingDB2; 
 ```
 
 
@@ -11,18 +11,18 @@ DROP DATABASE TrainingDB;
 Use the same file names and paths you used earlier. Replace them accordingly.
 ```sql 
 -- 1. Restore FULL backup 
-RESTORE DATABASE TrainingDB  
-FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB_Full.bak' 
+RESTORE DATABASE TrainingDB2  
+FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB2_Full.bak' 
 WITH NORECOVERY; 
 
 -- 2. Restore DIFFERENTIAL backup (if you created one) 
-RESTORE DATABASE TrainingDB  
-FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB_Diff.bak' 
+RESTORE DATABASE TrainingDB2  
+FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB2_Diff.bak' 
 WITH NORECOVERY; 
 
 -- 3. Restore TRANSACTION LOG backup (if you created one) 
-RESTORE LOG TrainingDB  
-FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB_Log.trn' 
+RESTORE LOG TrainingDB2  
+FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB2_Log.trn' 
 WITH RECOVERY; 
 ```
 ~~NOTE:~~
@@ -31,9 +31,11 @@ WITH RECOVERY;
 
 ## **Step 3: Verify the Restored Data**
 ```sql
-USE TrainingDB; 
+USE TrainingDB2; 
 SELECT * FROM Students; 
 ```
+
+![Output](./output.png)
 
 Check if all the records (including the last one you added before the transaction log backup) are 
 there. 

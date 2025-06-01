@@ -1,6 +1,6 @@
-CREATE DATABASE TrainingDB; 
+CREATE DATABASE TrainingDB1; 
 GO 
-USE TrainingDB; 
+USE TrainingDB1; 
 GO 
 CREATE TABLE Students ( 
 StudentID INT PRIMARY KEY, 
@@ -12,38 +12,38 @@ INSERT INTO Students VALUES
 (2, 'Mohammed Nasser', '2023-10-15'); 
 
 --Full BackUp
-BACKUP DATABASE TrainingDB TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB_Full.bak'; 
+BACKUP DATABASE TrainingDB1 TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB1_Full.bak'; 
 
 INSERT INTO Students VALUES (3, 'Fatma Said', '2024-01-10'); 
 
 --Differential Backup
-BACKUP DATABASE TrainingDB TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB_Diff.bak' WITH DIFFERENTIAL; 
+BACKUP DATABASE TrainingDB1 TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB1_Diff.bak' WITH DIFFERENTIAL; 
 
 --Transaction Log Backup
 -- First make sure Recovery Model is FULL 
-ALTER DATABASE TrainingDB SET RECOVERY FULL; 
+ALTER DATABASE TrainingDB1 SET RECOVERY FULL; 
 -- Now backup the log 
-BACKUP LOG TrainingDB TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB_Log.trn'; 
+BACKUP LOG TrainingDB1 TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB1_Log.trn'; 
 
 --Copy-Only Backup
-BACKUP DATABASE TrainingDB TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB_CopyOnly.bak' WITH 
+BACKUP DATABASE TrainingDB1 TO DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB1_CopyOnly.bak' WITH 
 COPY_ONLY; 
 
 --Step 1: Drop the Current Database (Simulate System Failure) 
-DROP DATABASE TrainingDB; 
+DROP DATABASE TrainingDB1; 
  -------
 USE master;
 
-ALTER DATABASE TrainingDB
+ALTER DATABASE TrainingDB1
 SET SINGLE_USER
 WITH ROLLBACK IMMEDIATE;
 
-DROP DATABASE TrainingDB;
+DROP DATABASE TrainingDB1;
 
 ----
 -- 1. Restore FULL backup 
-RESTORE DATABASE TrainingDB  
-FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB_Full.bak' 
+RESTORE DATABASE TrainingDB1  
+FROM DISK = 'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup\TrainingDB1_Full.bak' 
 WITH NORECOVERY; 
 
 -- 2. Restore DIFFERENTIAL backup (if you created one) 
